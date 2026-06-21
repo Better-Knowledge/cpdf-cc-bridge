@@ -1,0 +1,9 @@
+{
+  "agents": [
+    {
+      "name": "{{NAME}}",
+      "url": "http://{{NAME}}:8788",
+      "description": "(este agente) — descreva aqui o que ele faz, para os outros saberem quando consultá-lo."
+    }
+  ]
+}

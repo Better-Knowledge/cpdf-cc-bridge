@@ -1,0 +1,8 @@
+# O build não copia o workspace/config (são bind mounts em runtime).
+# Evita mandar credenciais, venv e bancos como contexto de build.
+config/
+workspace/tgbridge/.venv/
+workspace/tgbridge/**/__pycache__/
+workspace/tgbridge/*.db
+workspace/tgbridge/*.db-*
+.env

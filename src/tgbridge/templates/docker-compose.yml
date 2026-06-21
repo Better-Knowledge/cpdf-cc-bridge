@@ -1,0 +1,24 @@
+# Agente {{NAME}} — gerado por `tgbridge init`
+#
+# Subir:        docker compose up -d --build
+# Falar:        docker compose exec -it {{NAME}} claude   (login interativo na 1ª vez)
+# Logs/estado:  docker compose logs -f {{NAME}}
+#
+# Os segredos vêm de ./.env (env_file); o ${VAR} do .mcp.json resolve dentro do container.
+services:
+  {{NAME}}:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: {{NAME}}
+    restart: unless-stopped
+    env_file:
+      - ./.env
+    volumes:
+      - ./workspace:/home/{{NAME}}   # workspace: CLAUDE.md, .mcp.json, .claude/, tgbridge/
+      - ./config:/config             # CLAUDE_CONFIG_DIR: OAuth/login/settings persistem aqui
+    working_dir: /home/{{NAME}}
+    stdin_open: true
+    tty: true
+    command: ["/home/{{NAME}}/entrypoint.sh"]
+{{COMPOSE_NETWORKS}}

@@ -1,0 +1,11 @@
+[project]
+name = "tgbridge-whisper"
+version = "1.0.0"
+description = "Microserviço Whisper compartilhado (faster-whisper) com endpoint OpenAI-compatível"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn>=0.29",
+    "python-multipart>=0.0.9",
+    "faster-whisper>=1.0",
+]

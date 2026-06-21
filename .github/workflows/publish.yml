@@ -1,0 +1,39 @@
+name: Publish
+
+# Publica no PyPI quando uma tag vX.Y.Z é enviada.
+# Pré-requisitos (configurar antes da 1ª publicação):
+#  - PyPI Trusted Publishing para este repo (recomendado, sem token), OU
+#  - secret PYPI_API_TOKEN + trocar o passo final por `uv publish --token`.
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+      - name: Build
+        run: uv build
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write          # Trusted Publishing (OIDC) — sem token
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1

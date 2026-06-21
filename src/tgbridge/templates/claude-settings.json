@@ -1,0 +1,25 @@
+{
+  "enableAllProjectMcpServers": true,
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "allow": [
+      "Bash(python3 *)"
+    ],
+    "ask": [],
+    "deny": [
+      "Write(.mcp.json)",
+      "Edit(.mcp.json)",
+      "Write(.claude/settings.json)",
+      "Edit(.claude/settings.json)",
+      "Write(.claude/settings.local.json)",
+      "Edit(.claude/settings.local.json)",
+      "Write(agents-registry.json)",
+      "Edit(agents-registry.json)",
+      "Read(.secrets/**)",
+      "Write(.secrets/**)",
+      "Edit(.secrets/**)",
+      "Read(/config/bridge.secret)",
+      "Bash(cat /config/bridge.secret*)"
+    ]
+  }
+}

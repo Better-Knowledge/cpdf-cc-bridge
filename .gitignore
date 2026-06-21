@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+dist/
+build/
+
+# Testes / caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Estado de runtime (não deve existir no repo da lib, mas por segurança)
+*.db
+*.db-shm
+*.db-wal
+
+# Segredos
+.env

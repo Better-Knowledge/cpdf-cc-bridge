@@ -1,0 +1,51 @@
+# Workspace do agente {{NAME}} — versionar persona/estrutura, NUNCA dados pessoais.
+
+# Segredos e estado de runtime
+.env
+.env.*
+!.env.example
+.secrets/
+chat_logs/
+
+# DADOS PESSOAIS — backup local, fora do git (ver scripts/backup-data.sh).
+# Memórias e projetos crescem com PII; só a ESTRUTURA de pastas é versionada (.gitkeep).
+USER.md
+TOOLS.md
+HEARTBEAT.md
+DASHBOARD.md
+MEMORY.md
+
+# Ignora o CONTEÚDO de memory/ e projects/, mas mantém a árvore de pastas via .gitkeep.
+# (regra do git: para re-incluir um arquivo, o diretório-pai não pode estar excluído —
+#  por isso usamos `dir/**` + re-inclusão explícita de cada subpasta e do .gitkeep.)
+memory/**
+!memory/topics/
+!memory/daily/
+!memory/archive/
+!memory/topics/.gitkeep
+!memory/daily/.gitkeep
+!memory/archive/.gitkeep
+projects/**
+!projects/.gitkeep
+
+# Python / Node / caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+node_modules/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Logs / scratch / OS
+*.log
+tmp_*.py
+*_tmp.py
+.DS_Store
+Thumbs.db
+*.db
+*.db-shm
+*.db-wal

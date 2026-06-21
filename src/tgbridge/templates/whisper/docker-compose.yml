@@ -1,0 +1,31 @@
+# Whisper compartilhado — sobe UMA vez; N agentes consomem via rede tgbridge-net.
+#
+#   docker compose up -d --build           (ou: ../../install/tgbridge-install.sh whisper up)
+#
+# Agentes em modo 'shared' apontam OPENAI_BASE_URL=http://whisper:8000/v1 (alias de rede).
+services:
+  whisper:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tgbridge-whisper
+    restart: unless-stopped
+    env_file:
+      - ./.env
+    volumes:
+      - whisper-models:/root/.cache/huggingface   # modelo baixado uma vez (persiste)
+    networks:
+      - tgbridge-net
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  whisper-models:
+
+networks:
+  tgbridge-net:
+    external: true
